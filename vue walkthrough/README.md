@@ -11,5 +11,4 @@
 10.components
 
 # UI
-[UI ](./src/assets/images/UI.png
-)
+![UI](./src/assets/images/UI.png)
