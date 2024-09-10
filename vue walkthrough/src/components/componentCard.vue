@@ -1,11 +1,12 @@
 <script setup>
 import {ref} from 'vue'
-const props=defineProps(['title','date','time','location','description'])
+const props=defineProps(['title','date','time','location','description','imageUrl'])
 </script>
 <template>
     <div class="blogposts">
         
         <h4>{{ title }}</h4>
+        <img :src="imageUrl" alt="Blog Post Image" />
         <span>{{ date }}</span>
         <strong>{{ time }}</strong><br>
         <span>{{ location }}</span>

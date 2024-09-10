@@ -19,7 +19,7 @@ const posts = ref([
     location: "Nairobi, Kenya",
     description:
       "A local football tournament where the top teams from Nairobi battle it out for the championship.",
-    imageUrl: "path/to/sakata-dimba-image.jpg",
+    imageUrl: "./assets/images/UI.png"
   },
   {
     id: 2,
@@ -29,7 +29,7 @@ const posts = ref([
     location: "Addis Ababa, Ethiopia",
     description:
       "The Gez rivals, an intense football match between the two biggest teams in Ethiopia, attracts thousands of fans annually.",
-    imageUrl: "path/to/gez-rivals-image.jpg",
+    imageUrl: "../scr/assets/images/UI.png",
   },
   {
     id: 3,
@@ -65,6 +65,7 @@ const posts = ref([
       :time="post.time"
       :location="post.location"
       :description="post.description"
+      :imageUrl="post.imageUrl"
     >
     </componentCard>
   </div>
