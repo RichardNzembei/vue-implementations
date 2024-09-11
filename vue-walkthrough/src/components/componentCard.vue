@@ -1,6 +1,10 @@
 <script setup>
 import {ref} from 'vue'
 const props=defineProps(['title','date','time','location','description','imageUrl'])
+const emits=defineEmits(['buttonClicked'])
+const sendEvent=()=>{
+  emits('buttonClicked', 'you Joined the event')
+}
 </script>
 <template>
     <div class="blogposts">
@@ -11,7 +15,7 @@ const props=defineProps(['title','date','time','location','description','imageUr
         <strong>{{ time }}</strong><br>
         <span>{{ location }}</span>
         <p>{{ description }}</p>
-        <button>join</button>
+        <button @click="buttonClicked">join</button>
 
     </div>
     

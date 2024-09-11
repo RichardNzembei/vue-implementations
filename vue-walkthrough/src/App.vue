@@ -42,11 +42,14 @@ const posts = ref([
     imageUrl: "path/to/laliga-derby-image.jpg",
   },
 ]);
+const handleButtonClick=(message)=>{
+  console.log(message)
+}
 </script>
 <template>
   <div class="vuebasics">
     <h2>Vue Js Basics</h2>
-    <projectsCard />
+    <projectsCard />Component Events
     <aboutCard />
     <productCard />
     <cartCard />
@@ -66,6 +69,7 @@ const posts = ref([
       :location="post.location"
       :description="post.description"
       :imageUrl="post.imageUrl"
+      @buttonClicked="handleButtonClick"
     >
     </componentCard>
   </div>
