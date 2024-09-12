@@ -4,6 +4,7 @@ const props=defineProps(['title','date','time','location','description','imageUr
 const emits=defineEmits(['buttonClicked'])
 const sendEvent=()=>{
   emits('buttonClicked', 'you Joined the event')
+  alert('you Joined the event')
 }
 </script>
 <template>
@@ -15,7 +16,7 @@ const sendEvent=()=>{
         <strong>{{ time }}</strong><br>
         <span>{{ location }}</span>
         <p>{{ description }}</p>
-        <button @click="buttonClicked">join</button>
+        <button @click="sendEvent">join</button>
 
     </div>
     
