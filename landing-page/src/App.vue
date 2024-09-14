@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, shallowRef } from "vue";
 import HomeCard from "./components/HomeCard.vue";
 import ContactCard from "./components/ContactCard.vue";
 import AboutsCard from "./components/AboutsCard.vue";
 
-const currentView = ref(HomeCard);
+const currentView = shallowRef(HomeCard);
 const handleHashchange = () => {
   const hash = window.location.hash.substring(1);
   if (hash === "About") {
@@ -19,16 +19,33 @@ onMounted(() => {
   window.addEventListener("hashchange", handleHashchange);
   handleHashchange();
 });
+const shareData=ref('')
+function handleupdate(newData){
+
+  shareData.value=newData
+}
 </script>
 <template>
-  <nav class="navbar">
+  <div class="app">
+    <nav class="navbar">
     <a class="navbar-item" href="#Home">Home</a>
     <a class="navbar-item" href="#About">About</a>
     <a class="navbar-item" href="#Contact">Contact</a>
   </nav>
-  <component :is="currentView" />
+  <component 
+  :is="currentView"
+  @update-data="handleupdate"
+  :data="shareData"
+  />
+  </div>
+ 
+
 </template>
 <style scoped>
+.app{
+  background-color: antiquewhite;
+  height: 100%;
+}
 .navbar {
   background-color: #333;
   padding: 10px 10px;
