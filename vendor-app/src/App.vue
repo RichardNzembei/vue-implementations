@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, shallowRef } from "vue";
 import homeCard from "./components/homeCard.vue";
 import contactCard from "./components/contactCard.vue";
 import productCard from "./components/productCard.vue";
 import cartCard from "./components/cartCard.vue";
-const currentView = ref(homeCard);
+const currentView = shallowRef(homeCard);
 function onHashChange() {
   const hash = window.location.hash.substring(1);
   if (hash === "product") {
@@ -19,6 +19,10 @@ onMounted(() => {
   window.addEventListener("hashchange", onHashChange);
   onHashChange();
 });
+const isCartvisible=ref(false)
+function toogleSidebar(){
+    isCartvisible.value=!isCartvisible.value
+}
 </script>
 <template>
   <nav class="navbar">
@@ -28,15 +32,16 @@ onMounted(() => {
     <div class="logo">
       
     </div>
-    <a>
+    <a @click="toogleSidebar">
       <span class="icon icon-trolley"></span>
       
     </a>
   </nav>
   <component :is="currentView" />
   <cart-card  
-  :products="products"
-  :cart="cart"
+  v-if="isCartvisible"
+
+  @toogle="toogleSidebar"
   />
 
 </template>

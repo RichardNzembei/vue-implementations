@@ -1,5 +1,11 @@
 <script setup>
-const props=defineProps('products', 'cart')
+import {ref} from 'vue'
+
+const emit=defineEmits(['toogle'])
+const toogleSidebar=()=>{
+    emit('toogle')
+}
+
 </script>
 <template>
      <aside class="cart-container">
@@ -9,7 +15,7 @@ const props=defineProps('products', 'cart')
           Cart
           <i class="icofont-cart-alt icofont-1x"></i>
         </span>
-        <button @click="toogle" class="cart-close">&times;</button>
+        <button @click="toogleSidebar" class="cart-close">&times;</button>
       </h1>
 
       <div class="cart-body">
@@ -53,6 +59,9 @@ const props=defineProps('products', 'cart')
 .cart-container {
     position: fixed;
     overflow: hidden;
+    border-radius: 5px;
+    margin: 60px 10px ;
+    max-height: max-content;
 }
 
 .cart-container,
@@ -60,13 +69,13 @@ const props=defineProps('products', 'cart')
     top: 0px;
     right: 0px;
     width: 300px; /* Example value, replace with your desired width */
-    height: 100%;
+  
 }
 
 .cart {
     position: relative;
-    background: #777373; /* Example background color */
-    color: #181414; /* Example text color */
+    background: #a19494; /* Example background color */
+    color: #131212; /* Example text color */
     transition: right 1s ease;
 }
 
@@ -82,16 +91,19 @@ const props=defineProps('products', 'cart')
     border-bottom: 1px solid #333; /* Example border color */
     padding: 0px 15px;
     font-size: 26px;
+    color: blue;
 }
 
 .cart-close {
     background: transparent;
+    background-color: #8d8484;
     border: 0px;
     border-radius: 5px; /* Example border radius */
     padding: 0px 13px;
-    color: #fff; /* Example text color */
+    color: #a12929; /* Example text color */
     font-size: 20px;
     font-weight: bold;
+   
 }
 
 .cart-close:hover {
