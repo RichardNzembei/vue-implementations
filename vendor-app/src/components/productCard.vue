@@ -1,6 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import { ref,defineEmits,defineProps } from "vue";
 const products = ref([
+
   // Fruits
   {
     id: 1,
@@ -237,7 +238,16 @@ const products = ref([
     category: "Cereals",
     icon: "fas fa-seedling",
   },
+
 ]);
+const emit=defineEmits(['addToCart'])
+const props=defineProps({
+  product:Object
+})
+ 
+ function addToCart(){
+  emit('addToCart',props.product)
+ }
 </script>
 <template>
   <div class="search">

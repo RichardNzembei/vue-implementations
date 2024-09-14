@@ -1,6 +1,8 @@
 <script setup>
-import {ref} from 'vue'
-
+import {ref, defineEmits,defineProps} from 'vue'
+const props=defineProps({
+    cartItems:Array
+})
 const emit=defineEmits(['toogle'])
 const toogleSidebar=()=>{
     emit('toogle')
@@ -19,7 +21,7 @@ const toogleSidebar=()=>{
       </h1>
 
       <div class="cart-body">
-        <table class="cart-table">
+        <table class="cart-table" >
           <thead>
             <tr>
               <th><span class="sr-only">Product Image</span></th>
@@ -31,9 +33,9 @@ const toogleSidebar=()=>{
             </tr>
           </thead> 
           <tbody>
-            <tr >
+            <tr v-for="item in cartItems" :key="item.id">
               <td><i class="icofont-carrot icofont-3x"></i></td>
-              <td></td>
+              <td>{{ item.name }}</td>
               <td>price</td>
               <td class="center">total</td>
               <td>otal</td>

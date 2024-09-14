@@ -23,6 +23,11 @@ const isCartvisible=ref(false)
 function toogleSidebar(){
     isCartvisible.value=!isCartvisible.value
 }
+const cartItems=ref([])
+function hanldeAddToCart(product){
+  cartItems.value.push(product)
+
+}
 </script>
 <template>
   <nav class="navbar">
@@ -37,7 +42,12 @@ function toogleSidebar(){
       
     </a>
   </nav>
-  <component :is="currentView" />
+  <component
+   :is="currentView" 
+  :cartItems="cartItems"
+  
+  @addTocart="hanldeAddToCart"
+  />
   <cart-card  
   v-if="isCartvisible"
 
