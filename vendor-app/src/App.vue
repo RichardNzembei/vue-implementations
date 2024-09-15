@@ -146,8 +146,8 @@ button:hover {
 }
 .cartBadge{
   position: absolute;
-  top: 1px;
-  right: 150px;
+  top: 2px;
+  right: 148px;
   background-color: rgb(224, 35, 107);
   color: white;
   border-radius: 50%;
