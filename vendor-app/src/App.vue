@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, shallowRef } from "vue";
+import { onMounted, ref, shallowRef,computed } from "vue";
 import homeCard from "./components/homeCard.vue";
 import contactCard from "./components/contactCard.vue";
 import productCard from "./components/productCard.vue";
@@ -31,6 +31,9 @@ function handleAddToCart(product){
   cartItems.value.push(product)
 
 }
+const totalQuantity = computed(() => {
+  return cartItems.value.reduce((total, item) => total + item.quantity, 0);
+});
 </script>
 <template>
   <nav class="navbar">
@@ -42,6 +45,7 @@ function handleAddToCart(product){
     </div>
     <a @click="toogleSidebar">
       <span class="icon icon-trolley"></span>
+      <span class="cartBadge">{{ totalQuantity }}</span>
       
     </a>
   </nav>
@@ -139,5 +143,20 @@ button {
 
 button:hover {
   background-color: #646c74;
+}
+.cartBadge{
+  position: absolute;
+  top: 1px;
+  right: 150px;
+  background-color: rgb(224, 35, 107);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
 }
 </style>

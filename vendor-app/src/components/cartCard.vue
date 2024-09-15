@@ -7,6 +7,17 @@ const emit=defineEmits(['toogle'])
 const toogleSidebar=()=>{
     emit('toogle')
 }
+const removeItem=(item)=>{
+  const index=props.cartItems.indexOf(item)
+  if(index > -1){
+    props.cartItems.splice(index, 1)
+  }
+}
+const totalcost=computed(()=>{
+  return props.cartItems.reduce((total, item)=>{
+    return total+item.price*item.quantity
+  },0)
+})
 
 </script>
 <template>
@@ -16,6 +27,7 @@ const toogleSidebar=()=>{
         <span>
           Cart
           <i class="icofont-cart-alt icofont-1x"></i>
+          
         </span>
         <button @click="toogleSidebar" class="cart-close">&times;</button>
       </h1>
@@ -43,7 +55,7 @@ const toogleSidebar=()=>{
               <td class="center">{{ item.quantity }}</td>
               <td>{{ item.price * item.quantity }}</td>
               <td class="center">
-                <button class="cartRemove" @click="removeItem">
+                <button class="cartRemove" @click="removeItem(item)">
                   &times;
                 </button>
               </td>
@@ -53,7 +65,7 @@ const toogleSidebar=()=>{
 
         <p class="center" v-if="cartItems.length===0"><em>No items in cart</em></p><br><br>
         <div class="spread">
-          <span><strong>Total:</strong>total</span><br>
+          <span><strong>Total:</strong>{{ totalcost }}</span><span>ksh</span><br>
           <button class="checkout"><b>Checkout</b></button>
         </div>
       </div>

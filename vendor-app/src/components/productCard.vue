@@ -1,5 +1,5 @@
 <script setup>
-import { ref,defineEmits,defineProps } from "vue";
+import { ref,defineEmits,defineProps, computed } from "vue";
 const products = ref([
 
   // Fruits
@@ -191,10 +191,10 @@ const products = ref([
   },
   {
     id: 24,
-    name: "140",
+    name: "Rice",
     description:
       "Commonly consumed in various forms including plain rice and pilau",
-    price: 4,
+    price: 140,
     category: "Cereals",
     icon: "fas fa-rice",
   },
@@ -248,15 +248,21 @@ const props=defineProps({
  function addToCart(product){
   emit("addToCart",product)
  }
+ const searchTerm=ref('')
+ const filteredProducts=computed(()=>{
+  const search=searchTerm.value.trim().toLowerCase()
+  if(!search) return products.value
+  return products.value.filter(product=>product.category.toLowerCase().includes(search))
+ })
 </script>
 <template>
   <div class="search">
-    <input type="text" placeholder="search by category" />
-    <button><i class="fa fa-search"></i></button>
+    <input type="text" placeholder="search by category" v-model="searchTerm"/>
+  
   </div>
 
   <div class="card-container">
-    <div class="card" v-for="product in products" :key="product.id">
+    <div class="card" v-for="product in filteredProducts" :key="product.id">
       <span :class="product.icon" class="icon"></span>
       <h3>{{ product.name }}</h3>
       <h4>Price: Ksh {{ product.price }}</h4>
