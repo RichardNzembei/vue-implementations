@@ -12,7 +12,11 @@ Visit: [Vendor App](https://vue-implementations.onrender.com/)
   b.products component
   c.contact component
   d.cart component
-4.
+4.methods and computed propert for calculating
+     *total cost for each item
+     *total cost for all items
+     *total number of all items in cart
+ 5.passing data between sibling components using emits and props    
 
 # Goals
 1.nav links management using vue routing
