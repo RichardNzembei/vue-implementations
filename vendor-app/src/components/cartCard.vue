@@ -1,5 +1,5 @@
 <script setup>
-import {ref, defineEmits,defineProps} from 'vue'
+import {ref, defineEmits,defineProps,computed} from 'vue'
 const props=defineProps({
     cartItems:Array
 })
@@ -25,22 +25,25 @@ const toogleSidebar=()=>{
           <thead>
             <tr>
               <th><span class="sr-only">Product Image</span></th>
+              <th></th>
               <th>Product</th>
               <th>Price</th>
               <th>Qty</th>
               <th>Total</th>
               <th><span class="sr-only">Actions</span></th>
             </tr>
-          </thead> 
+          </thead> <br>
           <tbody>
             <tr v-for="item in cartItems" :key="item.id">
-              <td><i class="icofont-carrot icofont-3x"></i></td>
+              <td><i class="cartItems"></i></td>
+              
+              <td :class="item.icon" class="icon"></td>
               <td>{{ item.name }}</td>
-              <td>price</td>
-              <td class="center">total</td>
-              <td>otal</td>
+              <td>{{ item.price }}</td>
+              <td class="center">{{ item.quantity }}</td>
+              <td>{{ item.price * item.quantity }}</td>
               <td class="center">
-                <button class="btn btn-light cart-remove">
+                <button class="cartRemove" @click="removeItem">
                   &times;
                 </button>
               </td>
@@ -48,10 +51,10 @@ const toogleSidebar=()=>{
           </tbody>
         </table>
 
-        <p class="center"><em>No items in cart</em></p>
+        <p class="center" v-if="cartItems.length===0"><em>No items in cart</em></p><br><br>
         <div class="spread">
-          <span><strong>Total:</strong>total</span>
-          <button class="btn btn-light">Checkout</button>
+          <span><strong>Total:</strong>total</span><br>
+          <button class="checkout"><b>Checkout</b></button>
         </div>
       </div>
     </div>
@@ -61,24 +64,30 @@ const toogleSidebar=()=>{
 .cart-container {
     position: fixed;
     overflow: hidden;
-    border-radius: 5px;
+    border-radius: 10px;
     margin: 60px 10px ;
     max-height: max-content;
+    
 }
 
 .cart-container,
 .cart {
     top: 0px;
     right: 0px;
-    width: 300px; /* Example value, replace with your desired width */
+    width: 350px; /* Example value, replace with your desired width */
+    border-radius: 10px;
   
 }
 
 .cart {
     position: relative;
-    background: #a19494; /* Example background color */
-    color: #131212; /* Example text color */
+    background: #0f0d0d; /* Example background color */
+    color:white; /* Example text color */
     transition: right 1s ease;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    font-style: bold;
+    
 }
 
 .cart.hide {
@@ -87,36 +96,40 @@ const toogleSidebar=()=>{
 
 .cart-title {
     align-items: center;
-    min-height: 60px; /* Example height */
-    max-height: 60px; /* Example height */
-    background: #ddd; /* Example background color */
+    min-height: 40px; /* Example height */
+    max-height: 40px; /* Example height */
+    background: #5b87c2; /* Example background color */
     border-bottom: 1px solid #333; /* Example border color */
     padding: 0px 15px;
     font-size: 26px;
-    color: blue;
+    color: white;
 }
 
 .cart-close {
     background: transparent;
-    background-color: #8d8484;
+    background-color: #4c91df;
     border: 0px;
     border-radius: 5px; /* Example border radius */
     padding: 0px 13px;
-    color: #a12929; /* Example text color */
+    color:white; /* Example text color */
     font-size: 20px;
     font-weight: bold;
+    margin: 0 0 0 210px;
    
 }
 
 .cart-close:hover {
-    background: #999; /* Example hover background color */
+    background: #130f0f; /* Example hover background color */
 }
 
 .cart-table {
     width: 270px; /* Example value, adjust based on your cart width */
     border-collapse: collapse;
-    margin: 0px;
-    font-size: 14px; /* Example font size */
+    margin: 0 0 5px 5px;
+    font-size: 16px; /* Example font size */
+    padding: 10px;
+    justify-content: space-between;
+    
 }
 
 .cart-image {
@@ -130,9 +143,18 @@ const toogleSidebar=()=>{
     overflow: auto;
 }
 
-.cart-remove {
+.cartRemove {
     padding: 0px 7px;
     font-size: 18px; /* Example font size */
-}
 
+}
+.checkout{
+background-color: white;
+display: flex;
+margin: 20px;
+padding: 4px;
+color: rgb(33, 145, 33);
+font-size: 20px;
+border-radius: 5px;
+}
 </style>

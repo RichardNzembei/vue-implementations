@@ -5,11 +5,14 @@ import contactCard from "./components/contactCard.vue";
 import productCard from "./components/productCard.vue";
 import cartCard from "./components/cartCard.vue";
 const currentView = shallowRef(homeCard);
+const isCartvisible=ref(false)
+const cartItems=ref([])
+
 function onHashChange() {
   const hash = window.location.hash.substring(1);
   if (hash === "product") {
     currentView.value = productCard;
-  } else if (hash === "contact") {
+  } else if (hash === "Offers") {
     currentView.value = contactCard;
   } else {
     currentView.value = homeCard;
@@ -19,12 +22,12 @@ onMounted(() => {
   window.addEventListener("hashchange", onHashChange);
   onHashChange();
 });
-const isCartvisible=ref(false)
+
 function toogleSidebar(){
     isCartvisible.value=!isCartvisible.value
 }
-const cartItems=ref([])
-function hanldeAddToCart(product){
+
+function handleAddToCart(product){
   cartItems.value.push(product)
 
 }
@@ -33,7 +36,7 @@ function hanldeAddToCart(product){
   <nav class="navbar">
     <a class="navbar-items" href="#home">Home</a>
     <a class="navbar-items" href="#product">Product</a>
-    <a class="navbar-items" href="#contact">Contact</a>
+    <a class="navbar-items" href="#Offers">Offers</a>
     <div class="logo">
       
     </div>
@@ -44,13 +47,12 @@ function hanldeAddToCart(product){
   </nav>
   <component
    :is="currentView" 
-  :cartItems="cartItems"
-  
-  @addTocart="hanldeAddToCart"
+   :cartItems="cartItems"
+   @addToCart="handleAddToCart"
   />
   <cart-card  
   v-if="isCartvisible"
-
+  :cartItems="cartItems"
   @toogle="toogleSidebar"
   />
 
