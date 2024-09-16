@@ -1,5 +1,5 @@
 <script setup>
-import { ref,defineEmits,defineProps, computed } from "vue";
+import { ref, computed } from "vue";
 const products = ref([
 
   // Fruits
