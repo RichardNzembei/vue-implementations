@@ -19,3 +19,5 @@ const car={
 console.log(car.brand)
 updateBrand(car)
 console.log(car.brand)
+const objects=['richie','robin','reuben','saint']
+console.log(objects.map((object)=>object.length))
