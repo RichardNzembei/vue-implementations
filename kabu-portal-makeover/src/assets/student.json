@@ -1,0 +1,16 @@
+{
+    "students": [
+      {
+        "regNo": "CS/MG/3090/09/22",
+        "name": "REUBEN RICHARD NZEMBEI",
+        "idNo": "41333380",
+        "gender": "Male",
+        "address": "263",
+        "email": "richardsonreuben78@gmail.com",
+        "dateOfBirth": "2004-01-11",
+        "campus": "MAIN",
+        "password":"richie@innit"
+      }
+    ]
+  }
+  
