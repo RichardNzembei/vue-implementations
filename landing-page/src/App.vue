@@ -1,16 +1,17 @@
 <script setup>
 import { onMounted, ref, shallowRef } from "vue";
 import HomeCard from "./components/HomeCard.vue";
-import ContactCard from "./components/ContactCard.vue";
-import AboutsCard from "./components/AboutsCard.vue";
+import studentcard from "./components/studentcard.vue";
+import feeCard from "./components/feeCard.vue";
+
 
 const currentView = shallowRef(HomeCard);
 const handleHashchange = () => {
   const hash = window.location.hash.substring(1);
-  if (hash === "About") {
-    currentView.value = AboutsCard;
-  } else if (hash === "Contact") {
-    currentView.value = ContactCard;
+  if (hash === "Fee") {
+    currentView.value = feeCard;
+  } else if (hash === "Student") {
+    currentView.value = studentcard;
   } else {
     currentView.value = HomeCard;
   }
@@ -19,23 +20,28 @@ onMounted(() => {
   window.addEventListener("hashchange", handleHashchange);
   handleHashchange();
 });
-const shareData=ref('')
-function handleupdate(newData){
-
-  shareData.value=newData
+const studentData=ref({
+  RegNo:'',
+  Password:''
+})
+function handleSubmit(newData){
+  studentData.value={
+    ...studentData.value, ...newData
+  }
 }
+
 </script>
 <template>
   <div class="app">
     <nav class="navbar">
     <a class="navbar-item" href="#Home">Home</a>
-    <a class="navbar-item" href="#About">About</a>
-    <a class="navbar-item" href="#Contact">Contact</a>
+    <a class="navbar-item" href="#Fee">Fee</a>
+    <a class="navbar-item" href="#Student">Student</a>
   </nav>
   <component 
   :is="currentView"
-  @update-data="handleupdate"
-  :data="shareData"
+  @submitData="handleSubmit"
+  :data="studentData"
   />
   </div>
  
@@ -43,7 +49,7 @@ function handleupdate(newData){
 </template>
 <style scoped>
 .app{
-  background-color: antiquewhite;
+  background-color: white;
   height: 100%;
 }
 .navbar {
