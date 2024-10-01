@@ -1,25 +1,21 @@
 <script setup>
+import { useStudentstore } from '@/stores/studentStore';
 
 import {ref} from 'vue'
 const emit=defineEmits(['submitData'])
-const student=ref({})
-const props=defineProps({
-  student:{
-    type:Object,
-  default:()=>({
-    RegNo:'',
-    Password:''
-  })
-  }
- 
-})
+const studentStore=useStudentstore()
 const localStudent=ref({
-  RegNO:props.student?.RegNo|| '',
-  Password:props.student?.Password||''
+  RegNO:studentStore.student.RegNo ,
+  Password:studentStore.student.Password
 }
 )
 function submitData(){
+  studentStore.setStudent(localStudent.value)
   emit('submitData',localStudent.value)
+}
+function resetForm(){
+  studentStore.resetStudent()
+  localStudent.value={RegNO:'',Password:''}
 }
 </script>
 <template>
@@ -30,6 +26,7 @@ function submitData(){
     <label for="password">Password</label><br>
     <input type="text" placeholder="enter Password" v-model="localStudent.Password"><br>
     <button type="submit">Login</button>
+    <button type="button" @click="resetForm">reset</button>
   </form>
   </div>
  
