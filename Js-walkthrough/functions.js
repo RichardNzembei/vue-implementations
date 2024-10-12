@@ -13,7 +13,7 @@ function updateBrand(obj){
     obj=null
 }
 const car={
-    brand:'honda'
+    brand:'audi'
 
 }
 console.log(car.brand)
