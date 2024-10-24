@@ -1,5 +1,9 @@
 <script setup>
 import { useStudentstore } from '@/stores/studentStore';
+import formCard from './formCard.vue';
+import ButtonCard from './ButtonCard.vue'
+import modalCard from './modalCard.vue';
+import fancyButton from './fancyButton.vue';
 
 import {ref} from 'vue'
 const emit=defineEmits(['submitData'])
@@ -17,6 +21,7 @@ function resetForm(){
   studentStore.resetStudent()
   localStudent.value={RegNO:'',Password:''}
 }
+const fname=ref('')
 </script>
 <template>
   <div class="formCard">
@@ -30,10 +35,23 @@ function resetForm(){
   </form>
   </div>
  
-  
-  
+  <div>
+ <formCard v-model.capitalize="fname"/>
+ </div>
+  <div>
+    <ButtonCard class="mybutton" label="click me" ></ButtonCard>
+  </div>
+  <fancyButton>
+    click me
+  </fancyButton>
+
 </template>
 <style scoped>
+.mybutton{
+  background-color: white;
+  color: black;
+  margin-top: 5px;
+}
 input{
   margin: 10px;
   width: 200px;

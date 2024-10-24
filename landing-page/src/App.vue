@@ -3,6 +3,8 @@ import { onMounted, ref, shallowRef } from "vue";
 import HomeCard from "./components/HomeCard.vue";
 import studentcard from "./components/studentcard.vue";
 import feeCard from "./components/feeCard.vue";
+import crudOperation from "./components/crudOperation.vue";
+import formCard from "./components/formCard.vue";
 
 
 const currentView = shallowRef(HomeCard);
@@ -12,7 +14,10 @@ const handleHashchange = () => {
     currentView.value = feeCard;
   } else if (hash === "Student") {
     currentView.value = studentcard;
-  } else {
+  } else if(hash==="Crud"){
+    currentView.value=crudOperation;
+  }
+  else {
     currentView.value = HomeCard;
   }
 };
@@ -37,6 +42,7 @@ function handleSubmit(newData){
     <a class="navbar-item" href="#Home">Home</a>
     <a class="navbar-item" href="#Fee">Fee</a>
     <a class="navbar-item" href="#Student">Student</a>
+    <a class="navbar-item" href="#Crud">Crud</a>
   </nav>
   <component 
   :is="currentView"
@@ -44,7 +50,7 @@ function handleSubmit(newData){
   :data="studentData"
   />
   </div>
- 
+
 
 </template>
 <style scoped>
