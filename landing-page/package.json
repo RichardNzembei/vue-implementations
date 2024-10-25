@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "gapi-script": "^1.2.0",
     "pinia": "^2.2.4",
     "vue": "^3.4.29"
   },

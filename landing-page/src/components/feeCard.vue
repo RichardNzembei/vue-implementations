@@ -1,42 +1,66 @@
 <template>
-  <div class="flex justify-center items-center gap-3">
-    <button v-tooltip="'Click me!'">Hover me</button>
+  <div>
+    <!-- Attach the ref to the input element -->
+    <input ref="passwordInput" v-password-validation type="password" placeholder="Enter your password" />
+    <p class="error-message text-red-500"></p>
 
-    <div>
-      <button @click="show=!show">toggle</button>
-      <Transition name="slide-fade">
-        <p v-if="show">hello</p>
-      </Transition>
+    <!-- Validation Criteria -->
+    <div class="mt-2">
+      <div>
+        <input type="checkbox" :checked="isMinLength" disabled />
+        <label>At least 8 characters</label>
+      </div>
+      <div>
+        <input type="checkbox" :checked="isUppercase" disabled />
+        <label>At least 1 uppercase letter</label>
+      </div>
+      <div>
+        <input type="checkbox" :checked="isLowercase" disabled />
+        <label>At least 1 lowercase letter</label>
+      </div>
+      <div>
+        <input type="checkbox" :checked="isNumber" disabled />
+        <label>At least 1 number</label>
+      </div>
+      <div>
+        <input type="checkbox" :checked="isSpecialChar" disabled />
+        <label>At least 1 special character</label>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 
-const show = ref(false);
+// State variables for password validation
+const isMinLength = ref(false);
+const isUppercase = ref(false);
+const isLowercase = ref(false);
+const isNumber = ref(false);
+const isSpecialChar = ref(false);
+
+// Reference to the password input
+const passwordInput = ref(null);
+
+// Method to update checkbox states
+const updateValidationStatus = (status) => {
+  isMinLength.value = status.isMinLength;
+  isUppercase.value = status.isUppercase;
+  isLowercase.value = status.isLowercase;
+  isNumber.value = status.isNumber;
+  isSpecialChar.value = status.isSpecialChar;
+};
+
+// Use onMounted to ensure the input is available
+onMounted(() => {
+  // Set the updateValidationStatus method on the directive's instance
+  passwordInput.value.__updateValidationStatus = updateValidationStatus;
+});
 </script>
 
 <style scoped>
-.slide-fade-enter-active{
-  transition: all 0.6s ease-out;
-}
-.slide-fade-leave-active {
-  transition: all 1.2s cubic-bezier(1,0.5,0.8,1);
-}
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(40px);
-  opacity: 0;
-}
-.tooltip-text {
-  position: absolute;
-  background-color: black;
-  color: rgb(15, 55, 189);
-  padding: 5px;
-  border-radius: 4px;
-  white-space: nowrap;
-  display: none;
-  z-index: 1000;
+.error-message {
+  font-size: 0.875rem;
 }
 </style>
